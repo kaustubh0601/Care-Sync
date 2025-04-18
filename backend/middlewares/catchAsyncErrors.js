@@ -3,3 +3,6 @@ export const catchAsyncErrors = (theFunction) => {
     Promise.resolve(theFunction(req, res, next)).catch(next);
   };
 };
+
+
+// error ala tr server direct down hou naye mhanun middleware

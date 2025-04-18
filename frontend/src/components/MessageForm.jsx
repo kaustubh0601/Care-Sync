@@ -3,20 +3,20 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 const MessageForm = () => {
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState("");       // this value and backend values should be same
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
   const handleMessage = async (e) => {
-    e.preventDefault();
+    e.preventDefault();     // form will not be refresh by self
     try {
-      await axios
+      await axios                                                   // send data to backend
         .post(
           "http://localhost:4000/api/v1/message/send",
           { firstName, lastName, email, phone, message },
-          {
+          {                                                           // by defauld code fix
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
           }

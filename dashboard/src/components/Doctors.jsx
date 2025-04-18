@@ -30,9 +30,9 @@ const Doctors = () => {
       <h1>DOCTORS</h1>
       <div className="banner">
         {doctors && doctors.length > 0 ? (
-          doctors.map((element) => {
+          doctors.map((element, index) => {
             return (
-              <div className="card">
+              <div className="card" key={index}>
                 <img
                   src={element.docAvatar && element.docAvatar.url}
                   alt="doctor avatar"
@@ -52,7 +52,7 @@ const Doctors = () => {
                     Department: <span>{element.doctorDepartment}</span>
                   </p>
                   <p>
-                    NIC: <span>{element.nic}</span>
+                    Alternate Contact: <span>{element.nic}</span>
                   </p>
                   <p>
                     Gender: <span>{element.gender}</span>

@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    const fetchAppointments = async () => {
+    const fetchAppointments = async () => {         // show appointment on UI
       try {
         const { data } = await axios.get(
           "http://localhost:4000/api/v1/appointment/getall",
@@ -28,13 +28,13 @@ const Dashboard = () => {
     try {
       const { data } = await axios.put(
         `http://localhost:4000/api/v1/appointment/update/${appointmentId}`,
-        { status },
+        { status },                   // he update kr
         { withCredentials: true }
       );
-      setAppointments((prevAppointments) =>
+      setAppointments((prevAppointments) =>         // update appointment status
         prevAppointments.map((appointment) =>
-          appointment._id === appointmentId
-            ? { ...appointment, status }
+          appointment._id === appointmentId         // condition
+            ? { ...appointment, status }      // prev data + status add kr
             : appointment
         )
       );
@@ -64,9 +64,9 @@ const Dashboard = () => {
                 </h5>
               </div>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Facilis, nam molestias. Eaque molestiae ipsam commodi neque.
-                Assumenda repellendus necessitatibus itaque.
+              keep working...⌛
+              Natija Dekhane Layak Hoga
+              break it untill make it.. 
               </p>
             </div>
           </div>
@@ -79,6 +79,7 @@ const Dashboard = () => {
             <h3>10</h3>
           </div>
         </div>
+
         <div className="banner">
           <h5>Appointments</h5>
           <table>
@@ -94,7 +95,7 @@ const Dashboard = () => {
             </thead>
             <tbody>
               {appointments && appointments.length > 0
-                ? appointments.map((appointment) => (
+                ? appointments.map((appointment) => (           // appontment table values
                     <tr key={appointment._id}>
                       <td>{`${appointment.firstName} ${appointment.lastName}`}</td>
                       <td>{appointment.appointment_date.substring(0, 16)}</td>
@@ -103,7 +104,7 @@ const Dashboard = () => {
                       <td>
                         <select
                           className={
-                            appointment.status === "Pending"
+                            appointment.status === "Pending"        // apointment design base on value / give this class name base on appi... status
                               ? "value-pending"
                               : appointment.status === "Accepted"
                               ? "value-accepted"

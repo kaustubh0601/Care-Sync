@@ -14,7 +14,7 @@ import AddNewAdmin from "./components/AddNewAdmin";
 import "./App.css";
 
 const App = () => {
-  const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
+  const { isAuthenticated, setIsAuthenticated, setAdmin } =
     useContext(Context);
 
   useEffect(() => {

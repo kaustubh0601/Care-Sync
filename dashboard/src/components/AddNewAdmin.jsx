@@ -48,7 +48,7 @@ const AddNewAdmin = () => {
     }
   };
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated) {                 // if admin not authenticated then navigate them on login page
     return <Navigate to={"/login"} />;
   }
 

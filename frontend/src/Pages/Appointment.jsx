@@ -4,13 +4,13 @@ import AppointmentForm from "../components/AppointmentForm";
 
 const Appointment = () => {
   return (
-    <>
+    <div style={{ width: '100%', height: 'auto', overflowX: 'hidden' }}>
       <Hero
-        title={"Schedule Your Appointment | ZeeCare Medical Institute"}
+        title={"Schedule Your Appointment | KK Wellness Pavilion"}
         imageUrl={"/signin.png"}
       />
-      <AppointmentForm/>
-    </>
+      <AppointmentForm />
+    </div>
   );
 };
 

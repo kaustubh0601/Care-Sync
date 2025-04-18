@@ -15,22 +15,22 @@ const userSchema = new mongoose.Schema({
     minLength: [3, "Last Name Must Contain At Least 3 Characters!"],
   },
   email: {
-    type: String,
+    type: String, 
     required: [true, "Email Is Required!"],
     validate: [validator.isEmail, "Provide A Valid Email!"],
   },
   phone: {
     type: String,
     required: [true, "Phone Is Required!"],
-    minLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
-    maxLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
+    minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
+    maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
   },
   nic: {
     type: String,
-    required: [true, "NIC Is Required!"],
-    minLength: [13, "NIC Must Contain Only 13 Digits!"],
-    maxLength: [13, "NIC Must Contain Only 13 Digits!"],
-  },
+    required: [true, "Emergency Contact Number Is Required!"],
+    minLength: [10, "Emergency Contact Number Must Contain Only 10 Digits!"],
+    maxLength: [10, "Emergency Contact Number Must Contain Only 10 Digits!"],
+  }, 
   dob: {
     type: Date,
     required: [true, "DOB Is Required!"],
@@ -38,13 +38,13 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
     required: [true, "Gender Is Required!"],
-    enum: ["Male", "Female"],
+    enum: ["Male", "Female"],     // enum means only these value will accepted
   },
   password: {
     type: String,
     required: [true, "Password Is Required!"],
     minLength: [8, "Password Must Contain At Least 8 Characters!"],
-    select: false,
+    select: false,      // user ch pass nahi milnar explicitly ghav lagel
   },
   role: {
     type: String,
@@ -60,18 +60,18 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) {        // hash the password for sercurity
   if (!this.isModified("password")) {
     next();
   }
   this.password = await bcrypt.hash(this.password, 10);
 });
 
-userSchema.methods.comparePassword = async function (enteredPassword) {
+userSchema.methods.comparePassword = async function (enteredPassword) {     // when user login compare entered password with stored password
   return await bcrypt.compare(enteredPassword, this.password);
-};
+}; 
 
-userSchema.methods.generateJsonWebToken = function () {
+userSchema.methods.generateJsonWebToken = function () {                 // when user login generate json web token
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET_KEY, {
     expiresIn: process.env.JWT_EXPIRES,
   });

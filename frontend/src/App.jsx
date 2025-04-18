@@ -12,12 +12,15 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { Context } from "./main";
 import Login from "./Pages/Login";
+import ScrollToTop from "./components/ScrollToTop";
+
 const App = () => {
+  
   const { isAuthenticated, setIsAuthenticated, setUser } =
     useContext(Context);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUser = async () => {                   // only fetch/ check user when isAuth... change
       try {
         const response = await axios.get(
           "http://localhost:4000/api/v1/user/patient/me",
@@ -38,6 +41,7 @@ const App = () => {
   return (
     <>
       <Router>
+       <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -47,7 +51,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
-        <ToastContainer position="top-center" />
+        <ToastContainer position="top-center" />       {/* Posotions :- Kaha se ane chahiye toasters notification */}
       </Router>
     </>
   );

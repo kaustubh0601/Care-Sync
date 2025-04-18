@@ -1,5 +1,5 @@
 import React from "react";
-import Carousel from "react-multi-carousel";
+import Carousel from "react-multi-carousel";        /* line 2 3 inbuild vai react */
 import "react-multi-carousel/lib/styles.css";
 
 const Departments = () => {
@@ -42,11 +42,11 @@ const Departments = () => {
     },
   ];
 
-  const responsive = {
+  const responsive = {                  //   line 45 to 66 inbuild by react just go react web and copy pasr for slider           
     extraLarge: {
-      breakpoint: { max: 3000, min: 1324 },
+      breakpoint: { max: 3000, min: 1324 },         // break point is main :- kiti companent UI la kontya Size la disale pahijet
       items: 4,
-      slidesToSlide: 1, // optional, default to 1.
+      slidesToSlide: 1, // optional, default to 1.      // when click on arrow how many items should be change
     },
     large: {
       breakpoint: { max: 1324, min: 1005 },
@@ -71,11 +71,11 @@ const Departments = () => {
         <h2>Departments</h2>
         <Carousel
           responsive={responsive}
-          removeArrowOnDeviceType={[
+          removeArrowOnDeviceType={[        // slider wala arrow remove honar given  size  sathi many value mg array ghe
             // "superLargeDesktop",
             // "desktop",
-            "tablet",
-            "mobile",
+            // "medium",
+            "small",
           ]}
         >
           {departmentsArray.map((depart, index) => {

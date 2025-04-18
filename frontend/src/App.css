@@ -15,6 +15,7 @@ body {
   border: none;
   font-weight: bold;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 .white-btn {
   background: #fff;
@@ -196,6 +197,7 @@ h6 {
   font-size: 24px;
   margin-bottom: 30px;
   background: linear-gradient(140deg, #9083d5, #271776ca);
+  cursor: pointer;
 }
 .form-component .wrapper {
   display: flex;

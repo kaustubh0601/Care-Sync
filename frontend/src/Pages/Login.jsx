@@ -85,11 +85,11 @@ const Login = () => {
               Register Now
             </Link>
           </div>
-          <div style={{ justifyContent: "center", alignItems: "center" }}>
+          <div style={{ justifyContent: "center", alignItems: "center", hover: "cursor"}}>
             <button type="submit">Login</button>
           </div>
         </form>
-      </div>
+      </div> 
     </>
   );
 };

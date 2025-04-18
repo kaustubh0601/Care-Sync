@@ -12,18 +12,16 @@ const AppointmentForm = () => {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
-  const [department, setDepartment] = useState("Pediatrics");
+  const [department, setDepartment] = useState("");
   const [doctorFirstName, setDoctorFirstName] = useState("");
   const [doctorLastName, setDoctorLastName] = useState("");
   const [address, setAddress] = useState("");
   const [hasVisited, setHasVisited] = useState(false);
 
   const departmentsArray = [
-    "Pediatrics",
     "Orthopedics",
     "Cardiology",
     "Neurology",
-    "Oncology",
     "Radiology",
     "Physical Therapy",
     "Dermatology",
@@ -31,6 +29,7 @@ const AppointmentForm = () => {
   ];
 
   const [doctors, setDoctors] = useState([]);
+
   useEffect(() => {
     const fetchDoctors = async () => {
       const { data } = await axios.get(
@@ -42,6 +41,7 @@ const AppointmentForm = () => {
     };
     fetchDoctors();
   }, []);
+
   const handleAppointment = async (e) => {
     e.preventDefault();
     try {
@@ -123,7 +123,7 @@ const AppointmentForm = () => {
           <div>
             <input
               type="number"
-              placeholder="NIC"
+              placeholder="Emergency Contact Number"
               value={nic}
               onChange={(e) => setNic(e.target.value)}
             />
@@ -164,14 +164,14 @@ const AppointmentForm = () => {
                 );
               })}
             </select>
-            <select
+            <select                 // see this select carefully
               value={`${doctorFirstName} ${doctorLastName}`}
               onChange={(e) => {
                 const [firstName, lastName] = e.target.value.split(" ");
                 setDoctorFirstName(firstName);
                 setDoctorLastName(lastName);
               }}
-              disabled={!department}
+              disabled={!department}          // dept select nasel tr dr. name nahi disnar disable rahil
             >
               <option value="">Select Doctor</option>
               {doctors
@@ -195,7 +195,7 @@ const AppointmentForm = () => {
           <div
             style={{
               gap: "10px",
-              justifyContent: "flex-end",
+              justifyContent: "flex-end", 
               flexDirection: "row",
             }}
           >

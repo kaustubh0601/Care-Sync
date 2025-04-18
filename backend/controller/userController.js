@@ -4,9 +4,11 @@ import ErrorHandler from "../middlewares/error.js";
 import { generateToken } from "../utils/jwtToken.js";
 import cloudinary from "cloudinary";
 
-export const patientRegister = catchAsyncErrors(async (req, res, next) => {
-  const { firstName, lastName, email, phone, nic, dob, gender, password } =
-    req.body;
+              // Patient Register
+
+export const patientRegister = catchAsyncErrors(async (req, res, next) => {                   
+  const { firstName, lastName, email, phone, nic, dob, gender, password } = req.body;
+
   if (
     !firstName ||
     !lastName ||
@@ -39,30 +41,46 @@ export const patientRegister = catchAsyncErrors(async (req, res, next) => {
   generateToken(user, "User Registered!", 200, res);
 });
 
+          // Patient Login
+
 export const login = catchAsyncErrors(async (req, res, next) => {
-  const { email, password, confirmPassword, role } = req.body;
-  if (!email || !password || !confirmPassword || !role) {
+
+  const { email, password, confirmPassword, role } = req.body;          // take data from user
+
+  if (!email || !password || !confirmPassword || !role) {             // check everthing filled or not
     return next(new ErrorHandler("Please Fill Full Form!", 400));
   }
-  if (password !== confirmPassword) {
+
+  if (password !== confirmPassword) {           // match both pass
     return next(
       new ErrorHandler("Password & Confirm Password Do Not Match!", 400)
     );
   }
-  const user = await User.findOne({ email }).select("+password");
+
+  const user = await User.findOne({ email }).select("+password");   // + is mendatory
   if (!user) {
     return next(new ErrorHandler("Invalid Email Or Password!", 400));
   }
 
   const isPasswordMatch = await user.comparePassword(password);
+
   if (!isPasswordMatch) {
     return next(new ErrorHandler("Invalid Email Or Password!", 400));
   }
+
   if (role !== user.role) {
     return next(new ErrorHandler(`User Not Found With This Role!`, 400));
   }
   generateToken(user, "Login Successfully!", 201, res);
+  /* or
+    res.statuss(20).json({
+    success: true,
+    message: "Login Successfully!"
+    })
+  */
 });
+
+      // Admin Register and add new admin
 
 export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
   const { firstName, lastName, email, phone, nic, dob, gender, password } =
@@ -70,7 +88,7 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
   if (
     !firstName ||
     !lastName ||
-    !email ||
+    !email || 
     !phone ||
     !nic ||
     !dob ||
@@ -103,13 +121,15 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+          // add new doctor
+
 export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Doctor Avatar Required!", 400));
   }
-  const { docAvatar } = req.files;
+  const { docAvatar } = req.files;        // { docAvatar } this name should be same as in frontend 
   const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
-  if (!allowedFormats.includes(docAvatar.mimetype)) {
+  if (!allowedFormats.includes(docAvatar.mimetype)) {       // check karnar ki file type kont aahe
     return next(new ErrorHandler("File Format Not Supported!", 400));
   }
   const {
@@ -121,7 +141,7 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
     dob,
     gender,
     password,
-    doctorDepartment,
+    doctorDepartment 
   } = req.body;
   if (
     !firstName ||
@@ -178,6 +198,7 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+
 export const getAllDoctors = catchAsyncErrors(async (req, res, next) => {
   const doctors = await User.find({ role: "Doctor" });
   res.status(200).json({
@@ -195,6 +216,7 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Logout function for dashboard admin
+
 export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
   res
     .status(201)

@@ -34,7 +34,7 @@ const Sidebar = () => {
 
   const gotoHomePage = () => {
     navigateTo("/");
-    setShow(!show);
+    setShow(!show);     //show chi value true asel tr false kr false asel tr true kr
   };
   const gotoDoctorsPage = () => {
     navigateTo("/doctors");

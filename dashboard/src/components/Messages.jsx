@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { isAuthenticated } = useContext(Context);
+
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -30,8 +31,8 @@ const Messages = () => {
     <section className="page messages">
       <h1>MESSAGE</h1>
       <div className="banner">
-        {messages && messages.length > 0 ? (
-          messages.map((element) => {
+        {messages && messages.length > 0 ? (          // check msg exsits or not
+          messages.map((element) => {                 // if yes then do this
             return (
               <div className="card" key={element._id}>
                 <div className="details">
@@ -54,7 +55,7 @@ const Messages = () => {
               </div>
             );
           })
-        ) : (
+        ) : (                                           // if not then do this
           <h1>No Messages!</h1>
         )}
       </div>

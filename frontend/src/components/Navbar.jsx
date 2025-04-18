@@ -23,7 +23,7 @@ const Navbar = () => {
       });
   };
 
-  const navigateTo = useNavigate();
+  const navigateTo = useNavigate();       // where to go
 
   const goToLogin = () => {
     navigateTo("/login");
@@ -35,11 +35,11 @@ const Navbar = () => {
         <div className="logo">
           <img src="/logo.png" alt="logo" className="logo-img" />
         </div>
-        <div className={show ? "navLinks showmenu" : "navLinks"}>
+        <div className={show ? "navLinks showmenu" : "navLinks"}>     {/* For Responsiviness */}
           <div className="links">
             <Link to={"/"} onClick={() => setShow(!show)}>
               Home
-            </Link>
+            </Link> 
             <Link to={"/appointment"} onClick={() => setShow(!show)}>
               Appointment
             </Link>

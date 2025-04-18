@@ -35,7 +35,7 @@ const AddNewDoctor = () => {
 
   const handleAvatar = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
+    const reader = new FileReader();      // upload doctor photo to database
     reader.readAsDataURL(file);
     reader.onload = () => {
       setDocAvatarPreview(reader.result);
@@ -46,7 +46,7 @@ const AddNewDoctor = () => {
   const handleAddNewDoctor = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
+      const formData = new FormData();          // doc avtar aahe data file format madhe pn aahe not only text because we are sending like this
       formData.append("firstName", firstName);
       formData.append("lastName", lastName);
       formData.append("email", email);
@@ -60,7 +60,7 @@ const AddNewDoctor = () => {
       await axios
         .post("http://localhost:4000/api/v1/user/doctor/addnew", formData, {
           withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "multipart/form-data" },       // 🛑 see here header diff aahe
         })
         .then((res) => {
           toast.success(res.data.message);
@@ -86,7 +86,7 @@ const AddNewDoctor = () => {
   return (
     <section className="page">
       <section className="container add-doctor-form">
-        <img src="/logo.png" alt="logo" className="logo"/>
+        <img src="/logo-1.png" alt="logo" className="logo"/>
         <h1 className="form-title">REGISTER A NEW DOCTOR</h1>
         <form onSubmit={handleAddNewDoctor}>
           <div className="first-wrapper">
@@ -126,7 +126,7 @@ const AddNewDoctor = () => {
               />
               <input
                 type="number"
-                placeholder="NIC"
+                placeholder="Alternate contact Number"
                 value={nic}
                 onChange={(e) => setNic(e.target.value)}
               />
